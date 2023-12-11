@@ -1,5 +1,7 @@
 //Print the type of file where file name accepted through Command Line, give this c program in linux
 
+//Print the type of file where file name accepted through Command Line, give this c program in linux
+
 #include <stdio.h>
 #include <sys/stat.h>
 #include <string.h>
@@ -14,6 +16,7 @@ int main(int argc, char *argv[]) {
     struct stat file_info;
 
     if (stat(filename, &file_info) == 0) {
+
         if (S_ISREG(file_info.st_mode)) {
             printf("%s is a regular file.\n", filename);
         } else if (S_ISDIR(file_info.st_mode)) {
@@ -31,6 +34,7 @@ int main(int argc, char *argv[]) {
         } else {
             printf("%s is of unknown type.\n", filename);
         }
+        printf("I-node number:   %ju\n", (long) file_info.st_ino);
     } else {
         perror("stat");
         return 1;
